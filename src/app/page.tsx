@@ -4,6 +4,7 @@ import Image from 'next/image'
 import styles from './page.module.css'
 import { useRouter } from 'next/navigation'
 import { Popover ,Toast, Button,ToastOptions,Card} from 'react-vant';
+import Script from "next/script";
 import { useState,useEffect } from "react"
 
  
@@ -65,10 +66,21 @@ export default function IndexPage() {
 
 
 
-  const handleUserBtn=()=>{
-    router.push('/user');
-  }
 
+
+  const loginTelegram = () => {
+    // @ts-ignore
+    window?.Telegram.Login.auth({
+      bot_id: process.env.BOT_TOKEN || '',
+      request_access: 'write',
+      embed: 1
+    }, async (data: any) => {
+      if (!data) {
+        return
+      }
+      alert(JSON.stringify(data))
+    });
+  };
  
   useEffect(()=>{
   },[])
@@ -87,15 +99,16 @@ export default function IndexPage() {
           alt="选择语言"
         />}
       />
-   
+   <Link href="/user">
         <Image
          src="/user.png"
          className="mr-4 "
          width={30}
          height={30}
-         onClick={handleUserBtn}
          alt="用户"
        />
+       </Link>
+       <button onClick={loginTelegram}>Telegram 登录</button>
     </div>
     <div className='flex flex-col items-center w-full p-3 mt-3 rounded-xl amount-warper bg-slate-200'>
    <h3>钱包余额</h3>
@@ -174,6 +187,7 @@ export default function IndexPage() {
       <Card.Header>账单</Card.Header>
          <Card.Body>卡片内容区域</Card.Body>
     </Card>
+    <Script id={"telegram-web-app"} async={true} src={"https://telegram.org/js/telegram-web-app.js"}></Script>
  </div>
   )
 }
