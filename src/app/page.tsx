@@ -78,7 +78,7 @@ export default function IndexPage() {
       if (!data) {
         return
       }
-      alert(JSON.stringify(data))
+     console.log(data,'8888888')
     });
   };
  
