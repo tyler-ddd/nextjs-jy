@@ -69,9 +69,10 @@ export default function IndexPage() {
 
 
   const loginTelegram = () => {
+    console.log('denglu ')
     // @ts-ignore
     window?.Telegram.Login.auth({
-      bot_id: process.env.BOT_TOKEN || '',
+      bot_id: '6984097183:AAE2XbzgCoW7v3wbj6kGtk3MY3eyoGC3dfo',
       request_access: 'write',
       embed: 1
     }, async (data: any) => {
