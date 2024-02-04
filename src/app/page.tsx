@@ -54,8 +54,17 @@ const invoices = [
 
 const actions = [{ text: '中文' }, { text: '英文' }];
 export default function IndexPage() {
+  
   const select = (option: { text: ToastOptions }) => Toast.info(option.text);
   const router = useRouter();
+
+  useEffect(() => {
+    
+  },[])
+  
+
+
+
   const handleUserBtn=()=>{
     router.push('/user');
   }
