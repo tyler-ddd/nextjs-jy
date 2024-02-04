@@ -69,15 +69,8 @@ export default function IndexPage() {
     router.push('/user');
   }
 
-  async function getData() {
-    const res = await fetch('http://localhost:3000/api/test');
-    const data = await res.json();
-    console.log(data)
-    return data;
-  }
-
+ 
   useEffect(()=>{
-    getData()
   },[])
   return (
     <div className='container p-4 pt-6'>
