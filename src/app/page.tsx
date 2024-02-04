@@ -55,7 +55,7 @@ const invoices = [
 
 const actions = [{ text: '中文' }, { text: '英文' }];
 export default function IndexPage() {
-  
+  const [loginData,setLoginData]=useState()
   const select = (option: { text: ToastOptions }) => Toast.info(option.text);
   const router = useRouter();
 
@@ -79,6 +79,7 @@ export default function IndexPage() {
       if (!data) {
         return
       }
+      setLoginData(data)
      console.log(data,'8888888')
     });
   };
@@ -112,7 +113,7 @@ export default function IndexPage() {
        <button onClick={loginTelegram}>Telegram 登录</button>
     </div>
     <div className='flex flex-col items-center w-full p-3 mt-3 rounded-xl amount-warper bg-slate-200'>
-   <h3>钱包余额</h3>
+   <h3>钱包余额{JSON.stringify(loginData)}</h3>
    <div className='flex items-center justify-between w-full px-3 mt-3'>
           <div className='flex items-center justify-start'>
     <Image
