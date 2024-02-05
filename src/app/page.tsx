@@ -112,7 +112,7 @@ export default function IndexPage() {
        <button onClick={loginTelegram}>Telegram 登录</button>
     </div>
     <div className='flex flex-col items-center w-full p-3 mt-3 rounded-xl amount-warper bg-slate-200'>
-   <h3>钱包余额{loginData?.initDataUnsafe.user.username || ''}</h3>
+   <h3>钱包余额{loginData?.initDataUnsafe?.user?.username || ''}</h3>
    <div className='flex items-center justify-between w-full px-3 mt-3'>
           <div className='flex items-center justify-start'>
     <Image
