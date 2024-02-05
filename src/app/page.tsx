@@ -55,12 +55,21 @@ const invoices = [
 
 const actions = [{ text: '中文' }, { text: '英文' }];
 export default function IndexPage() {
-  const [loginData,setLoginData]=useState()
+  const [loginData,setLoginData]=useState<any>({})
   const select = (option: { text: ToastOptions }) => Toast.info(option.text);
   const router = useRouter();
 
   useEffect(() => {
-    
+    const script = document.createElement('script');
+    script.src = 'https://telegram.org/js/telegram-web-app.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    script.onload = () => {
+       // @ts-ignore
+      const appContext = window?.Telegram.WebApp;
+      setLoginData(appContext)
+    };
   },[])
   
 
@@ -70,18 +79,8 @@ export default function IndexPage() {
 
   const loginTelegram = () => {
     console.log('denglu ')
-    // @ts-ignore
-    window?.Telegram.Login.auth({
-      bot_id: '6984097183:AAE2XbzgCoW7v3wbj6kGtk3MY3eyoGC3dfo',
-      request_access: 'write',
-      embed: 1
-    }, async (data: any) => {
-      if (!data) {
-        return
-      }
-      setLoginData(data)
-     console.log(data,'8888888')
-    });
+   
+ 
   };
  
   useEffect(()=>{
@@ -113,7 +112,7 @@ export default function IndexPage() {
        <button onClick={loginTelegram}>Telegram 登录</button>
     </div>
     <div className='flex flex-col items-center w-full p-3 mt-3 rounded-xl amount-warper bg-slate-200'>
-   <h3>钱包余额{JSON.stringify(loginData)}</h3>
+   <h3>钱包余额{loginData?.initDataUnsafe.user.username || ''}</h3>
    <div className='flex items-center justify-between w-full px-3 mt-3'>
           <div className='flex items-center justify-start'>
     <Image
@@ -189,7 +188,7 @@ export default function IndexPage() {
       <Card.Header>账单</Card.Header>
          <Card.Body>卡片内容区域</Card.Body>
     </Card>
-    <Script id={"telegram-web-app"} async={true} src={"https://telegram.org/js/telegram-web-app.js"}></Script>
+    {/* <Script id={"telegram-web-app"} async={true} src={"https://telegram.org/js/telegram-web-app.js"}></Script> */}
  </div>
   )
 }
