@@ -187,8 +187,9 @@ export default function IndexPage() {
 		   </div>
        
        <Card>
+      <p className="break-words">{JSON.stringify(loginData?.initDataUnsafe?.user)}</p>
       <Card.Header>账单</Card.Header>
-         <Card.Body>{JSON.stringify(loginData?.initDataUnsafe?.user)}</Card.Body>
+         <Card.Body>1111</Card.Body>
     </Card>
     {/* <Script id={"telegram-web-app"} async={true} src={"https://telegram.org/js/telegram-web-app.js"}></Script> */}
  </div>
