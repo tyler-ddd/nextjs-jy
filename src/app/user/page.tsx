@@ -10,7 +10,7 @@ export default function User() {
     const { initWebAppData } = useWebApp();
     useEffect(() => {
         // 获取用户信息
-        const user = initWebAppData.user;
+        const user = initWebAppData?.user;
         console.log(user);
       }, []);
   return (
