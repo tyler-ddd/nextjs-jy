@@ -114,7 +114,7 @@ export default function IndexPage() {
 
     </div>
     <div className='flex flex-col items-center w-full p-3 mt-3 rounded-xl amount-warper bg-slate-200'>
-   <h3>钱包余额{loginData?.initDataUnsafe?.user?.username || ''}和{JSON.stringify(loginData?.initDataUnsafe?.user)}</h3>
+   <h3>钱包余额{loginData?.initDataUnsafe?.user?.username || ''}</h3>
    <div className='flex items-center justify-between w-full px-3 mt-3'>
           <div className='flex items-center justify-start'>
     <Image
@@ -188,7 +188,7 @@ export default function IndexPage() {
        
        <Card>
       <Card.Header>账单</Card.Header>
-         <Card.Body>卡片内容区域</Card.Body>
+         <Card.Body>{JSON.stringify(loginData?.initDataUnsafe?.user)}</Card.Body>
     </Card>
     {/* <Script id={"telegram-web-app"} async={true} src={"https://telegram.org/js/telegram-web-app.js"}></Script> */}
  </div>
