@@ -110,7 +110,7 @@ export default function IndexPage() {
        />
        </Link>
        <button onClick={loginTelegram}>{loginData?.initDataUnsafe?.user?.first_name }</button>
-       <button>{loginData?.initDataUnsafe?.user?.last_name}</button>
+       <button>和{loginData?.initDataUnsafe?.user?.last_name}</button>
     </div>
     <div className='flex flex-col items-center w-full p-3 mt-3 rounded-xl amount-warper bg-slate-200'>
    <h3>钱包余额{loginData?.initDataUnsafe?.user?.username || ''}</h3>
