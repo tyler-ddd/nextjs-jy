@@ -1,4 +1,4 @@
-"use client"
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { WebAppProvider } from '@vkruglikov/react-telegram-web-app';
@@ -19,10 +19,10 @@ export default function RootLayout({
   
   return (
     <html lang="en">
+      <WebAppProvider>
       <body className={inter.className}>
-      <WebAppProvider options={{
-  smoothButtonsTransition: true
-}}>{children}</WebAppProvider></body>
+      {children}</body>
+      </WebAppProvider>
     </html>
   )
 }
