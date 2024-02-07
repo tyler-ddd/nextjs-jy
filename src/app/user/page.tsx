@@ -16,6 +16,7 @@ export default function User() {
         <div className="flex flex-col items-start justify-between h-10 ml-3">
             <h3 className="text-xl font-medium ">{user?.first_name}</h3>
             <p className="text-sm ">ID：{user?.id}</p>
+            <p>{JSON.stringify(user)}</p>
         </div>
         </div>
         <Divider className="my-3 " />
