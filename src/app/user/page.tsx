@@ -3,11 +3,19 @@ import Link from "next/link"
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { TelegramProvider, useTelegram } from "../../lib/TelegramProvider";
+import { MainButton, useShowPopup } from '@vkruglikov/react-telegram-web-app';
 import {Image,Divider } from 'react-vant';
 
 const User=()=> {
     const { user, webApp } = useTelegram();
     console.log(user);
+    const showPopup = useShowPopup();
+
+    const handleClick = () =>
+      showPopup({
+        message: 'Hello, I am popup',
+      });
+  
     useEffect(() => {
         if (webApp) {
           webApp.BackButton.isVisible = true; // 设置返回按钮可见
@@ -17,6 +25,7 @@ const User=()=> {
     
   return (
     <div className='container p-4 pt-6'>
+           <MainButton text="确定" onClick={handleClick} />
         <div className="flex items-center justify-start w-full h-24">
         <Image round fit='cover' width='80px' height='80px' src='https://img.yzcdn.cn/vant/cat.jpeg' />
         <div className="flex flex-col items-start justify-between h-10 ml-3">
