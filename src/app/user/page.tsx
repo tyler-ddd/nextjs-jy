@@ -8,7 +8,13 @@ import {Image,Divider } from 'react-vant';
 const User=()=> {
     const { user, webApp } = useTelegram();
     console.log(user);
-   
+    useEffect(() => {
+        if (webApp) {
+          webApp.BackButton.isVisible = true; // 设置返回按钮可见
+          // 还可以进行其他设置和操作
+        }
+      }, [webApp]);
+    
   return (
     <div className='container p-4 pt-6'>
         <div className="flex items-center justify-start w-full h-24">
