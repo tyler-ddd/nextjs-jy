@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 "use client"
 import Link from "next/link"
 import Image from 'next/image'
@@ -6,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { Popover ,Toast, Button,ToastOptions,Card} from 'react-vant';
 import { MainButton, useShowPopup } from '@vkruglikov/react-telegram-web-app';
 import { useState,useEffect } from "react"
+import Head from "next/head"
 
  
 const invoices = [
@@ -95,6 +97,9 @@ export default function IndexPage() {
   },[])
   return (
     <div className='container p-4 pt-6'>
+      <Head>
+        <script src="https://telegram.org/js/telegram-web-app.js" />
+      </Head>
     <div className='flex justify-end w-full'>
     <Popover
         placement="bottom-end"
