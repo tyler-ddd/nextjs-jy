@@ -4,7 +4,7 @@ import Image from 'next/image'
 import styles from './page.module.css'
 import { useRouter } from 'next/navigation'
 import { Popover ,Toast, Button,ToastOptions,Card} from 'react-vant';
-import Script from "next/script";
+import { MainButton, useShowPopup } from '@vkruglikov/react-telegram-web-app';
 import { useState,useEffect } from "react"
 
  
@@ -82,6 +82,14 @@ export default function IndexPage() {
    
  
   };
+
+  const showPopup = useShowPopup();
+
+  const handleClick = () =>
+    showPopup({
+      message: 'Hello, I am popup',
+    });
+
  
   useEffect(()=>{
   },[])
@@ -191,6 +199,7 @@ export default function IndexPage() {
       <Card.Header>账单</Card.Header>
          <Card.Body>1111</Card.Body>
     </Card>
+    <MainButton text="SHOW POPUP" onClick={handleClick} />
     {/* <Script id={"telegram-web-app"} async={true} src={"https://telegram.org/js/telegram-web-app.js"}></Script> */}
  </div>
   )

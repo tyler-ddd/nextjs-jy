@@ -21,6 +21,9 @@ export default function RootLayout({
 
     <html lang="en">
       <body className={inter.className}>
+      <Head>
+        <script async src="https://telegram.org/js/telegram-web-app.js" />
+      </Head>
       {children}
       </body>
     </html>
