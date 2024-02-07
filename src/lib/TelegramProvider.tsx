@@ -1,7 +1,7 @@
 // TelegramProvider
 import Script from "next/script";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import type { ITelegramUser, IWebApp } from "../types";
+import type { ITelegramUser, IWebApp } from "./types.d.ts";
 
 export interface ITelegramContext {
   webApp?: IWebApp;
