@@ -200,11 +200,12 @@ export default function IndexPage() {
 		   </div>
        
        <Card>
+
+       <MainButton text="确定" onClick={handleClick} />
       <p className="break-words">{JSON.stringify(loginData?.initDataUnsafe?.user)}</p>
       <Card.Header>账单</Card.Header>
          <Card.Body>1111</Card.Body>
     </Card>
-    <MainButton text="SHOW POPUP" onClick={handleClick} />
     {/* <Script id={"telegram-web-app"} async={true} src={"https://telegram.org/js/telegram-web-app.js"}></Script> */}
  </div>
   )
