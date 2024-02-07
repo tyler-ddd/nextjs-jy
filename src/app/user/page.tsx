@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { TelegramProvider, useTelegram } from "../../lib/TelegramProvider";
 import {Image,Divider } from 'react-vant';
 
-export default function User() {
+const User=()=> {
     const { user, webApp } = useTelegram();
     console.log(user);
    
@@ -33,3 +33,14 @@ export default function User() {
     </div>
   )
 }
+
+
+const WithTelegramProvider = () => {
+    return (
+      <TelegramProvider>
+        <User />
+      </TelegramProvider>
+    );
+  };
+
+  export default WithTelegramProvider
