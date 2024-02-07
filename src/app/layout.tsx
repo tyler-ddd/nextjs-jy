@@ -2,7 +2,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
-import { TelegramProvider } from "../lib/TelegramProvider";
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -22,9 +21,7 @@ export default function RootLayout({
 
     <html lang="en">
       <body className={inter.className}>
-       <TelegramProvider>
       {children}
-      </TelegramProvider>
       </body>
     </html>
   )
