@@ -2,7 +2,7 @@
 "use client"
  import Link from "next/link"
  import Image from 'next/image'
- import { Space, Table, Tag } from 'antd';
+ import { Space, Table, Button,message } from 'antd';
  import { useRouter } from 'next/navigation'
  import { useState,useEffect } from "react"
  import {baseUrl} from '../../config'
@@ -25,55 +25,7 @@
   }
   return text
  }
- const columns = [
-   {
-     title: '接收地址',
-     dataIndex: 'acceptAddr',
-     key: 'acceptAddr',
-     render: (text:string) => <a>{text}</a>,
-   },
-   {
-     title: '创建时间',
-     dataIndex: 'createDate',
-     key: 'createDate',
-   },
-   {
-    title: '	交易hash',
-    dataIndex: 'hash',
-    key: 'hash',
-  },
-  {
-    title: '	还款总金额',
-    dataIndex: 'repayAmount',
-    key: 'repayAmount',
-  },
-  {
-    title: '	还款时间',
-    dataIndex: 'repayDate',
-    key: 'repayDate',
-  },
-   {
-     title: '审核时间',
-     dataIndex: 'auditDate',
-     key: 'auditDate',
-   },
-   {
-     title: '审核状态',
-     key: 'auditStatus',
-     dataIndex: 'auditStatus', 
-     render: (val:any) => <span>{getstatus(val)}</span>,
-   },
-   {
-     title: '操作',
-     key: 'action',
-     render: (_:any, record:any) => (
-       <Space size="middle">
-         <a>Invite {record.name}</a>
-         <a>Delete</a>
-       </Space>
-     ),
-   },
- ];
+ 
  const data = [
    {
      key: '1',
@@ -98,10 +50,53 @@
    },
  ]
  export default function Yuzhi() {
+  const columns = [
+    {
+      title: '接收地址',
+      dataIndex: 'acceptAddr',
+      key: 'acceptAddr',
+      render: (text:string) => <a>{text}</a>,
+    },
+    {
+      title: '创建时间',
+      dataIndex: 'createDate',
+      key: 'createDate',
+    },
+    {
+     title: '	预支总金额',
+     dataIndex: 'amount',
+     key: 'amount',
+     render: (text:string, record:any) => <a>{text}{record.currency}</a>,
+   },
+   {
+     title: '	用户id',
+     dataIndex: 'userId',
+     key: 'userId',
+   },
+  
+    {
+      title: '审核状态',
+      key: 'auditStatus',
+      dataIndex: 'auditStatus', 
+      render: (val:any) => <span>{getstatus(val)}</span>,
+    },
+    {
+      title: '操作',
+      key: 'action',
+      render: (_:any, record:any) => (
+        <Space size="middle">
+          <Button onClick={()=>handlepass(record)}>通过</Button>
+          <Button onClick={()=>handleno(record)} danger>拒绝</Button>
+        </Space>
+      ),
+    },
+  ];
    const router = useRouter()
    const [lastId,setLastId]=useState(0)
    const [limit,setLimit]=useState(10)
    const [listData,setListData]=useState([])
+   const [messageApi, contextHolder] = message.useMessage();
+
    const init=()=>{
     fetch(`${baseUrl}/sys/advance/private/audit/list?lastId=${lastId}&&limit=${limit}`)
     .then(response => response.json())
@@ -111,6 +106,61 @@
       .catch(err=>{
         console.log(err)
       })
+   }
+
+   const handlepass=(record:any)=>{
+    
+    let values={
+      id:record.advanceId,
+      status:1
+    }
+    fetch(`${baseUrl}/sys/advance/public/audit`,{method: 'POST',body: JSON.stringify(values), headers: {
+      'Content-Type': 'application/json' // 设置请求头为 JSON
+    }})
+    .then(response => response.json())
+    .then(res=>{
+      
+      if(res.code==200){
+        messageApi.open({
+          type: 'success',
+          content: res.msg,
+        });
+        init()
+      }else{
+        console.log(res,'99999999')
+       alert(res.msg)
+      }
+      
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+   }
+
+   const handleno=(record:any)=>{
+    let values={
+      id:record.advanceId,
+      status:2
+    }
+    fetch(`${baseUrl}/sys/advance/public/audit`,{method: 'POST',body: JSON.stringify(values), headers: {
+      'Content-Type': 'application/json' // 设置请求头为 JSON
+    }})
+    .then(response => response.json())
+    .then(res=>{
+      if(res.code==200){
+        messageApi.open({
+          type: 'success',
+          content: res.msg,
+        });
+        init()
+      }else{
+        alert(res.msg)
+      }
+      console.log(res,'99999999')
+    })
+    .catch(err=>{
+      console.log(err)
+    })
    }
    useEffect(()=>{
   if(!localStorage.getItem('token')){
