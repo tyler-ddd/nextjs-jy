@@ -84,10 +84,17 @@
       title: '操作',
       key: 'action',
       render: (_:any, record:any) => (
-        <Space size="middle">
-          <Button onClick={()=>handlepass(record)}>通过</Button>
-          <Button onClick={()=>handleno(record)} danger>拒绝</Button>
+        
+          <Space size="middle">
+          {record.auditStatus===0?<Button onClick={()=>handlepass(record)}>通过</Button> :
+        <></>
+        }
+          {record.auditStatus===0?<Button onClick={()=>handleno(record)} danger>拒绝</Button> :
+        <></>
+        }
         </Space>
+       
+       
       ),
     },
   ];
@@ -114,9 +121,10 @@
       id:record.advanceId,
       status:1
     }
-    fetch(`${baseUrl}/sys/advance/public/audit`,{method: 'POST',body: JSON.stringify(values), headers: {
-      'Content-Type': 'application/json' // 设置请求头为 JSON
-    }})
+    const headers = new Headers();
+headers.append('Content-Type', 'application/json');
+headers.append('Authorization', localStorage.getItem('token') || ''); // 如果token可能为null，需要处理为一个默认值
+    fetch(`${baseUrl}/sys/advance/private/audit`,{method: 'POST',body: JSON.stringify(values), headers: headers})
     .then(response => response.json())
     .then(res=>{
       
@@ -142,9 +150,10 @@
       id:record.advanceId,
       status:2
     }
-    fetch(`${baseUrl}/sys/advance/public/audit`,{method: 'POST',body: JSON.stringify(values), headers: {
-      'Content-Type': 'application/json' // 设置请求头为 JSON
-    }})
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', localStorage.getItem('token') || ''); // 如果token可能为null，需要处理为一个默认值
+        fetch(`${baseUrl}/sys/advance/private/audit`,{method: 'POST',body: JSON.stringify(values), headers: headers})
     .then(response => response.json())
     .then(res=>{
       if(res.code==200){
